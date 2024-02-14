@@ -1,0 +1,63 @@
+<div class="ekart--product--details--info scroll">
+    <div class="ekart-product-detail-close">
+        <i class="fa fa-times" aria-hidden="true"></i>
+    </div>
+    <div class="ekart-product-detail-image">
+        <img [src]="productDetailToShow.imageURL" class="ekart-product-detail-image">
+    </div>
+
+    <div class="ekart-product-detail">
+        <div class="ekart-product-detail-name">
+            <h2>{{productDetailToShow.name}}</h2>
+        </div>
+        <div class="ekart-product-detail-gbc">
+            <span>{{productDetailToShow.gender}}</span>
+            <span>{{productDetailToShow.brand}}</span>
+            <span>{{productDetailToShow.category}}</span>
+        </div>
+        <div class="ekart-product-detail-price">
+            <div *ngIf="productDetailToShow.discountPrice;else other_content">
+                <p>
+                    <span style="background-color: red; color:white"><s>{{productDetailToShow.price}}</s></span>
+                    <span style="background-color: green; color:white">{{productDetailToShow.discountPrice}}</span> (Inclusive of all taxes)
+                </p>
+            </div>
+            <ng-template #other_content>
+                <p>
+                    <span style="background-color: green; color:white">{{productDetailToShow.price}}</span> (Inclusive of all taxes)
+                </p>
+            </ng-template>
+        </div>
+        <div class="ekart-product-detail-size">
+            <div style="padding: 5px 0px;border-bottom: #ccc 2px solid">
+                <h4>Available Size</h4>
+            </div>
+            <div style="margin-top: 20px">
+                <span class="ekart-product-detail-available-size"
+                    *ngFor="let size of productDetailToShow.size">{{size}}</span>
+            </div>
+
+            <div class="ekart-product-detail-color">
+                <div style="padding: 5px 0px;border-bottom: #ccc 2px solid">
+                    <h4>Available Color</h4>
+                </div>
+                <div style="margin-top: 20px;">
+                    <span class="ekart-product-detail-available-color" *ngFor="let item of productDetailToShow.color"
+                    [ngStyle]="{'background-color': item.toLowerCase()}"></span>
+                </div>
+            </div>
+
+            <div class="ekart-product-detail-desc">
+                <div style="padding: 5px 0px;border-bottom: #ccc 2px solid">
+                    <h4>Product Description</h4>
+                </div>
+                <div style="margin-top: 20px">
+                    <p>{{productDetailToShow.description}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="ekart-product-detail-addtoCart">
+            <button class="btn-add-to-cart">{{productDetailToShow.is_in_inventory?'ADD TO CART':'NOTIFY ME'}}</button>
+        </div>
+    </div>
+    <div class="overlay"></div>
